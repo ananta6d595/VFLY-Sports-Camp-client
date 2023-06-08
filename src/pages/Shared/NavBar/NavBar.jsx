@@ -2,6 +2,7 @@
 import Container from "../../../components/Container";
 import Logo from "./Logo";
 import NavListOption from "./NavListOption";
+import ProfileLoginLogout from "./ProfileLoginLogout";
 
 const NavBar = () => {
     return (
@@ -10,7 +11,7 @@ const NavBar = () => {
                 <Container>
                     <Logo></Logo>
                     <NavListOption></NavListOption>
-
+                    <ProfileLoginLogout></ProfileLoginLogout>
                 </Container>
             </div>
         </>
