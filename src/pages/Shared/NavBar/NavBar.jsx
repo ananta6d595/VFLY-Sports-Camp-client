@@ -1,5 +1,7 @@
-import { Container } from "postcss";
+
+import Container from "../../../components/Container";
 import Logo from "./Logo";
+import NavListOption from "./NavListOption";
 
 const NavBar = () => {
     return (
@@ -7,6 +9,8 @@ const NavBar = () => {
             <div className="bg-rose-100 w-full fixed z-10 shadow-sm">
                 <Container>
                     <Logo></Logo>
+                    <NavListOption></NavListOption>
+
                 </Container>
             </div>
         </>
