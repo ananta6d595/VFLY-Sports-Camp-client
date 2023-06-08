@@ -8,17 +8,17 @@ const NavBar = () => {
 
         const navList = (
             <>
-                <Link>Home</Link>
+                <Link to='/' >Home</Link>
                 <Link>Instructors</Link>
                 <Link>Classes</Link>
                 <Link>Dashboard</Link>
             </>
         );
     return (
-        <div className="bg-black ">
-            <div className=" w-full fixed z-10 shadow-sm ">
+        <>
+            <div className="w-full fixed z-10">
                 <Container>
-                    <div className="grid grid-cols-3 items-center h-16">
+                    <div className="grid grid-cols-3 items-center h-16  backdrop-blur-md">
                         <div className="dropdown lg:hidden">
                             <label tabIndex={0} className="btn btn-ghost  ">
                                 <svg
@@ -37,19 +37,19 @@ const NavBar = () => {
                             </label>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                                className="menu menu-compact dropdown-content mt-3  shadow bg-base-100 bg-opacity-90 p-4 rounded-box w-52">
                                 {navList}
                             </ul>
                         </div>
                         <Logo></Logo>
-                        <div className="hidden lg:flex gap-5 justify-center">
+                        <div className="hidden lg:flex gap-5 justify-center text-white bg-blue-500 bg-opacity-30 p-2 rounded-3xl ">
                             {navList}
                         </div>
                         <ProfileLoginLogout></ProfileLoginLogout>
                     </div>
                 </Container>
             </div>
-        </div>
+        </>
     );
 };
 

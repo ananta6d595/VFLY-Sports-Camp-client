@@ -8,6 +8,8 @@ const Home = () => {
                 <div>
 
                 <SwiperCustom></SwiperCustom>
+
+                
                 </div>
 
             </Container>
