@@ -1,8 +1,16 @@
+import Container from "../components/Container";
+import SwiperCustom from "../components/SwiperCustom";
 
 const Home = () => {
     return (
         <div>
-            This is home...
+            <Container>
+                <div>
+
+                <SwiperCustom></SwiperCustom>
+                </div>
+
+            </Container>
         </div>
     );
 };

@@ -9,6 +9,7 @@ const ProfileLoginLogout = () => {
     //     };
     return (
         <div>
+            <div className="flex justify-end">User Profile</div>
             {/* {user ? (
                 <>
                     <span>{user?.displayName}</span>

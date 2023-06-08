@@ -1,7 +1,7 @@
 
 const Logo = () => {
     return (
-        <div>
+        <div className="flex justify-center lg:justify-start">
             camps logo
         </div>
     );
