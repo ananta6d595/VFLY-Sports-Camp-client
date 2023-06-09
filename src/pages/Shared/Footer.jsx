@@ -3,20 +3,18 @@ import Container from "../../components/Container";
 const Footer = () => {
     return (
         <Container>
-            <div className=" bg-image  bg-cover md:bg-contain">
-                <div className="bg-blue-900 bg-opacity-75">
-
-
+            <div className=" bg-image bg-cover md:bg-contain">
+                <div className="bg-gradient-to-t from-black to-gray-900">
                     <footer className="  footer p-5 md:p-10 lg:px-20 text-slate-200">
                         <div>
-                            <div className="  rounded-3xl px-4 py-6 border-8 border-white">
-                                <h1 className="font-semibold text-5xl text-blue-white ">
-                                    VOLL<span className="text-orange-400">Y</span>
-
+                            <div className="  rounded-3xl px-4 py-6 border-8 bg-gray-500 border-white">
+                                <h1 className="font-semibold text-5xl  ">
+                                    <span className="text-blue-800">V</span>FL
+                                    <span className="text-orange-400">Y</span>
                                 </h1>
                             </div>
                             <p className="font-medium text-base text-slate-200 ms-4">
-                                Summer Volleyball Camp
+                                Summer Sports Camp
                             </p>
                         </div>
                         <div>

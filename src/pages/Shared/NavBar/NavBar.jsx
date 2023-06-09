@@ -16,7 +16,7 @@ const NavBar = () => {
         );
     return (
         <>
-            <div className="w-full fixed z-10">
+            <div className="w-full fixed z-30">
                 <Container>
                     <div className="grid grid-cols-3 items-center h-16  backdrop-blur-md">
                         <div className="dropdown lg:hidden">
