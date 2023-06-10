@@ -3,7 +3,11 @@ import Main from "../Layout/Main";
 import Home from "../pages/Home/Home";
 import Instructors from "../pages/Instructors/Instructors";
 import Classes from "../pages/Classes/Classes";
-import DashBoard from "../pages/DashBoard/DashBoard";
+import Dashboard from "../Layout/Dashboard";
+import MySelectedClasses from "../pages/DashBoard/MySelectedClasses";
+import MyEnrolledClasses from "../pages/DashBoard/MyEnrolledClasses";
+import AddClass from "../pages/DashBoard/AddClass";
+import InstructorClasses from "../pages/DashBoard/InstructorClasses";
 
 
 export const router = createBrowserRouter([
@@ -12,21 +16,42 @@ export const router = createBrowserRouter([
         element: <Main></Main>,
         children: [
             {
-                path: '/',
-                element: <Home></Home>
+                path: "/",
+                element: <Home></Home>,
             },
             {
-                path: '/instructors',
-                element: <Instructors></Instructors>
+                path: "/instructors",
+                element: <Instructors></Instructors>,
             },
             {
-                path: '/classes',
-                element: <Classes></Classes>
+                path: "/classes",
+                element: <Classes></Classes>,
+            },
+        ],
+    },
+    {
+        path: "dashboard",
+        element: <Dashboard></Dashboard>,
+        children: [
+            //student dashboard
+            {
+                path: "selectedClass",
+                element: <MySelectedClasses></MySelectedClasses>,
             },
             {
-                path: '/dashboard',
-                element: <DashBoard></DashBoard>
+                path: "enrolledClass",
+                element: <MyEnrolledClasses></MyEnrolledClasses>,
             },
-        ]
+
+            //instructor dashboard
+            {
+                path: "addClass",
+                element: <AddClass></AddClass>,
+            },
+            {
+                path: "instructorClasses",
+                element: <InstructorClasses></InstructorClasses>,
+            },
+        ],
     },
 ]);
