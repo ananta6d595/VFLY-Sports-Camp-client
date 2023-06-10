@@ -2,16 +2,16 @@
 import Container from "../../../components/Container";
 import Logo from "./Logo";
 import ProfileLoginLogout from "./ProfileLoginLogout";
-import { Link } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 
 const NavBar = () => {
 
         const navList = (
             <>
-                <Link to='/' >Home</Link>
-                <Link>Instructors</Link>
-                <Link>Classes</Link>
-                <Link>Dashboard</Link>
+                <NavLink to="/">Home</NavLink>
+                <NavLink to="/instructors">Instructors</NavLink>
+                <NavLink to="/classes">Classes</NavLink>
+                <NavLink to="/dashboard">Dashboard</NavLink>
             </>
         );
     return (

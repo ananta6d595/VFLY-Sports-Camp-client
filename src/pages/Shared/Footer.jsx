@@ -3,7 +3,7 @@ import Container from "../../components/Container";
 const Footer = () => {
     return (
         <Container>
-            <div className=" bg-image bg-cover md:bg-contain">
+            <div className="pt-16 md:bg-contain ">
                 <div className="bg-gradient-to-t from-black to-gray-900">
                     <footer className="  footer p-5 md:p-10 lg:px-20 text-slate-200">
                         <div>
