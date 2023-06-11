@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import { RxHamburgerMenu } from "react-icons/rx";
 const SideBar = ({ children }) => {
     // TODO: checking isAdmin and isInstructor dynamic
     const isAdmin = false;
@@ -45,11 +45,11 @@ const SideBar = ({ children }) => {
                     type="checkbox"
                     className="drawer-toggle"
                 />
-                <div className="drawer-content flex flex-col items-center md:pt-9">
+                <div className="drawer-content  items-center md:pt-9">
                     <label
                         htmlFor="my-drawer-2"
-                        className="btn btn-primary drawer-button lg:hidden">
-                        Open Menu
+                        className=" drawer-button lg:hidden">
+                        <RxHamburgerMenu className="ms-2 mt-3"/>
                     </label>
                     {/* Page content here */}
                     {children}

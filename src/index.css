@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+* {
+    font-family: "Manrope", sans-serif;
+}
+
+
+.input-field{
+
+    @apply
+    p-2 border-b-blue-500 border-white border-2 rounded-sm focus:rounded-lg focus:outline-none focus:border-blue-500 focus:ring-blue-500 focus:ring-1 focus:border-2 duration-100
+}
