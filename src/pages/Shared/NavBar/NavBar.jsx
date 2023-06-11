@@ -1,19 +1,50 @@
-
 import Container from "../../../components/Container";
 import Logo from "./Logo";
 import ProfileLoginLogout from "./ProfileLoginLogout";
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
-
-        const navList = (
-            <>
-                <NavLink to="/">Home</NavLink>
-                <NavLink to="/instructors">Instructors</NavLink>
-                <NavLink to="/classes">Classes</NavLink>
-                <NavLink to="/dashboard">Dashboard</NavLink>
-            </>
-        );
+    const navList = (
+        <>
+            <NavLink
+                to="/"
+                className={({ isActive }) =>
+                    isActive
+                        ? "text-lg px-4 rounded-3xl bg-white bg-opacity-50  text-gray-900 "
+                        : "px-4 text-xl "
+                }>
+                Home
+            </NavLink>
+            <NavLink
+                to="/instructors"
+                className={({ isActive }) =>
+                    isActive
+                        ? "text-lg px-4 rounded-3xl bg-white bg-opacity-50  text-gray-900 "
+                        : "px-4 text-xl "
+                }>
+                Instructors
+            </NavLink>
+            <NavLink
+                to="/classes"
+                className={({ isActive }) =>
+                    isActive
+                        ? "text-lg px-4 rounded-3xl bg-white bg-opacity-50  text-gray-900 "
+                        : "px-4 text-xl "
+                }>
+                Classes
+            </NavLink>
+            {/* //TODO: make dashboard link dynamic. when clicking it should show 1st menus page  */}
+            <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                    isActive
+                        ? "text-lg px-4 rounded-3xl bg-white bg-opacity-50  text-gray-900 "
+                        : "px-4 text-xl "
+                }>
+                Dashboard
+            </NavLink>
+        </>
+    );
     return (
         <>
             <div className="w-full fixed z-30">
@@ -42,7 +73,7 @@ const NavBar = () => {
                             </ul>
                         </div>
                         <Logo></Logo>
-                        <div className="hidden lg:flex gap-5 justify-center text-white bg-blue-500 bg-opacity-30 p-2 rounded-3xl ">
+                        <div className="hidden lg:flex gap-5 justify-center text-white bg-blue-500 bg-opacity-40 p-2 rounded-3xl ">
                             {navList}
                         </div>
                         <ProfileLoginLogout></ProfileLoginLogout>

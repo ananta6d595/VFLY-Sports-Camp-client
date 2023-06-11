@@ -11,6 +11,8 @@ import InstructorClasses from "../pages/DashBoard/InstructorClasses";
 import ManageUsers from "../pages/DashBoard/ManageUsers";
 import ManageClasses from "../pages/DashBoard/ManageClasses";
 import FeedBack from "../pages/DashBoard/FeedBack";
+import Login from "../pages/Login/Login";
+import SignUp from "../pages/SignUp/SignUp";
 
 
 export const router = createBrowserRouter([
@@ -29,6 +31,14 @@ export const router = createBrowserRouter([
             {
                 path: "/classes",
                 element: <Classes></Classes>,
+            },
+            {
+                path: "/login",
+                element: <Login></Login>,
+            },
+            {
+                path: "/signup",
+                element: <SignUp></SignUp>,
             },
         ],
     },
