@@ -8,6 +8,9 @@ import MySelectedClasses from "../pages/DashBoard/MySelectedClasses";
 import MyEnrolledClasses from "../pages/DashBoard/MyEnrolledClasses";
 import AddClass from "../pages/DashBoard/AddClass";
 import InstructorClasses from "../pages/DashBoard/InstructorClasses";
+import ManageUsers from "../pages/DashBoard/ManageUsers";
+import ManageClasses from "../pages/DashBoard/ManageClasses";
+import FeedBack from "../pages/DashBoard/FeedBack";
 
 
 export const router = createBrowserRouter([
@@ -51,6 +54,19 @@ export const router = createBrowserRouter([
             {
                 path: "instructorClasses",
                 element: <InstructorClasses></InstructorClasses>,
+            },
+            //admin dashboard
+            {
+                path: "manageClass",
+                element: <ManageClasses></ManageClasses>,
+            },
+            {
+                path: "manageUsers",
+                element: <ManageUsers></ManageUsers>,
+            },
+            {
+                path: "manageClass/feedback",
+                element: <FeedBack></FeedBack>,
             },
         ],
     },

@@ -2,17 +2,17 @@ import { NavLink } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 const SideBar = ({ children }) => {
     // TODO: checking isAdmin and isInstructor dynamic
-    const isAdmin = false;
-    const isInstructor = true;
+    const isAdmin = true;
+    const isInstructor = false;
 
     // admin menu navigation
     const adminMenu = (
         <>
             <li>
-                <NavLink to="selectedClass">My Selected Classes</NavLink>
+                <NavLink to="manageClass">Manage Classes</NavLink>
             </li>
             <li>
-                <NavLink to="enrolledClass">My Enrolled Classes</NavLink>
+                <NavLink to="manageUsers">Manage Users</NavLink>
             </li>
         </>
     );
