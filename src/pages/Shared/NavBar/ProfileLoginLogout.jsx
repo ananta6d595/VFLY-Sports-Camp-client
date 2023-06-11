@@ -1,15 +1,18 @@
+import { useContext } from "react";
+import {  Link } from "react-router-dom";
+
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const ProfileLoginLogout = () => {
-
-    // const { user, logOut } = useContext(AuthContext);
-    //     const handleLogOut = () => {
-    //         logOut()
-    //             .then(() => {})
-    //             .catch((error) => console.log(error));
-    //     };
+    const { user, logOut } = useContext(AuthContext);
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {})
+            .catch((error) => console.log(error));
+    };
     return (
-        <div className="flex items-center gap-6">
-            {/* {user ? (
+        <div className="">
+            {user ? (
                 <div
                     className="tooltip tooltip-bottom "
                     data-tip={user?.displayName}>
@@ -27,7 +30,7 @@ const ProfileLoginLogout = () => {
             {user ? (
                 // <Link to="/">
                 <button
-                    onClick={handelLogout}
+                    onClick={handleLogOut}
                     className="btn inline-flex items-center rounded-md bg-cyan-700 hover:bg-cyan-500 border-0 text-white">
                     Logout
                 </button>
@@ -38,7 +41,7 @@ const ProfileLoginLogout = () => {
                         Login
                     </button>
                 </Link>
-            )} */}
+            )}
         </div>
     );
 };
