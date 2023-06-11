@@ -25,6 +25,7 @@ const AddClass = () => {
                             {...register("className")}
                         />
                     </div>
+                    {/* // TODO: Upload image in imgbb */}
                     <div className="mb-9">
                         <h4 className="italic"> Upload Image </h4>
                         <input
