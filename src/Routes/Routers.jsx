@@ -13,6 +13,7 @@ import ManageClasses from "../pages/DashBoard/ManageClasses";
 import FeedBack from "../pages/DashBoard/FeedBack";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
+import PrivateRoute from "./PrivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -44,7 +45,11 @@ export const router = createBrowserRouter([
     },
     {
         path: "dashboard",
-        element: <Dashboard></Dashboard>,
+        element: (
+            <PrivateRoute>
+                <Dashboard></Dashboard>
+            </PrivateRoute>
+        ),
         children: [
             //student dashboard
             {

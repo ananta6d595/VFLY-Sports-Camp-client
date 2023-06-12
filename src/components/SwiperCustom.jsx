@@ -6,6 +6,35 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const SwiperCustom = () => {
+
+const bannerImages = [
+    {
+        image: "https://www.bobactonsports.com/wp-content/uploads/2020/01/Soccer-e1579118003474.png",
+        title: "Football camp",
+        subtitle: "Learn football this summer ",
+    },
+    {
+        image: "https://tbrnewsmedia.com/wp-content/uploads/2021/09/Northport-Smithtown-East-volleyball-092821-Zack-Zdrojeski-Landon-1636-scaled.jpg",
+        title: "Volley Class",
+        subtitle: "Serve volley and be the best ",
+    },
+    {
+        image: "https://www.insauga.com/wp-content/uploads/2023/03/70S_6399.jpg",
+        title: "Swimming Session",
+        subtitle: "Cold swim in heated summer ",
+    },
+    {
+        image: "https://www.sportcamp.gr/sites/sportcamp/files/news/table_tennis.jpg",
+        title: "Tennis camp",
+        subtitle: "Smash tennis this summer ",
+    },
+    {
+        image: "https://camps.chalkbeat.org/wp-content/uploads/sites/4/event-manager-uploads/event_banner/2023/02/Sport-2.jpg",
+        title: "Basket Ball Camp",
+        subtitle: "Learn basketball and get exited ",
+    },
+];
+
     return (
         <div className="">
             <Swiper
@@ -22,42 +51,28 @@ const SwiperCustom = () => {
                 }}
                 speed={500}
                 modules={[Autoplay, EffectFade, Navigation, Pagination]}
-                className="h-[600px]">
-                <SwiperSlide>
-                    <img
-                        src="https://swiperjs.com/demos/images/nature-1.jpg"
-                        className="absolute h-[300px] md:h-[730px] left-0 w-full object-cover"
-                    />
-                    <div className="absolute h-[300px] md:h-[730px] left-0 w-full bg-slate-950 opacity-30"></div>
-                    <div className="absolute left-0 text-white h-[300px] md:h-[730px] w-full flex justify-center items-center">
-                        <div className="text-center">
-                            <h1 className="font-bold text-3xl md:text-6xl mb-5">
-                                Hello to the world of Legos
-                            </h1>
-                            <p className="text-xl md:text-3xl mb-5">
-                                Find the piece you want
-                            </p>
-                        </div>
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img
-                        src="https://swiperjs.com/demos/images/nature-2.jpg"
-                        className="w-full "
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img
-                        src="https://swiperjs.com/demos/images/nature-3.jpg"
-                        className="w-full "
-                    />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img
-                        src="https://swiperjs.com/demos/images/nature-4.jpg"
-                        className="w-full "
-                    />
-                </SwiperSlide>
+                className="h-[300px] md:h-[550px] lg:h-[680px]">
+                {bannerImages.map((banner, index) => {
+                    return (
+                        <SwiperSlide key={index}>
+                            <img
+                                src={banner.image}
+                                className="absolute h-[300px] md:h-[550px] lg:h-[680px] left-0 w-full object-cover"
+                            />
+                            <div className="absolute left-0 w-full h-[300px] md:h-[550px] lg:h-[680px] bg-slate-950 opacity-30"></div>
+                            <div className="absolute left-0 text-white h-[300px] md:h-[550px] lg:h-[680px] w-full flex justify-center items-center">
+                                <div className="text-center">
+                                    <h1 className="font-bold text-3xl md:text-6xl mb-5">
+                                        {banner.title}
+                                    </h1>
+                                    <p className="text-xl md:text-3xl mb-5">
+                                        {banner.subtitle}
+                                    </p>
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                    );
+                })}
             </Swiper>
         </div>
     );

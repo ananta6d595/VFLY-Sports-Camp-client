@@ -1,51 +1,70 @@
 import { useContext, useState } from "react";
-import { Form, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import { useForm } from "react-hook-form";
+import { FaEye } from "react-icons/fa";
+import { BsEyeSlash } from "react-icons/bs";
+import Swal from "sweetalert2";
 // import useTitle from "../../hooks/useTitle";
 
 const SignUp = () => {
     // useTitle("Register");
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(null);
+    // const [error, setError] = useState(null);
+    // const [success, setSuccess] = useState(null);
+    const [isHide, setHide] = useState(true);
     const { createUser } = useContext(AuthContext);
-    const HandelSignUp = (event) => {
+    const navigate = useNavigate();
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm();
+
+    const handleHideEye = (event) => {
         event.preventDefault();
-        const name = event.target.name.value;
-        const email = event.target.email.value;
-        const password = event.target.password.value;
-        const confirm = event.target.confirm.value;
-        const photo = event.target.photo.value;
-
-        setError("");
-        setSuccess("");
-
-        if (password != confirm) {
-            setError("Confirm password doesn't match!");
-            return;
-        } else if (password.length < 6) {
-            setError("Password must be at least 6 characters");
-            return;
-        } else if (password == null) {
-            setError("Password required");
-            return;
-        } else if (email == null) {
-            setError("Email required");
-            return;
-        }
-
-        createUser(email, password)
+        setHide(!isHide);
+    };
+    const onSubmit = (data) => {
+        // console.log(data);
+        // console.log(import.meta.env.VITE_server);
+        createUser(data.email, data.password)
             .then((res) => {
                 const createdUser = res.user;
                 updateProfile(createdUser, {
                     // why updateProfile working here not in Auth provider
-                    displayName: name,
-                    photoURL: photo,
+                    displayName: data.name,
+                    photoURL: data.image,
+                }).then(() => {
+                    // save user in mongodb
+                    const saveUser = { name: data.name, email: data.email };
+                    fetch(`${import.meta.env.VITE_server}/users`, {
+                        method: "PATCH",
+                        headers: {
+                            "content-type": "application/json",
+                        },
+                        body: JSON.stringify(saveUser),
+                    })
+                        .then((res) => res.json())
+                        .then((data) => {
+                            // console.log(data);
+                            if (data.upsertedId) {
+                                reset();
+                                Swal.fire({
+                                    position: "center",
+                                    icon: "success",
+                                    title: "Signed Up",
+                                    timer: 1000,
+                                });
+                                navigate("/");
+                            }
+                        });
                 });
-                setSuccess("Registration Complete");
             })
-            .catch((error) => setError(error.message));
+            .catch((error) => console.log(error.message));
     };
 
     return (
@@ -57,111 +76,113 @@ const SignUp = () => {
                         <div className="max-w-md mx-auto">
                             <div>
                                 <h1 className="text-2xl font-semibold mb-7 text-center">
-                                    Register
+                                    Sign Up
                                 </h1>
                             </div>
-                            <Form onSubmit={HandelSignUp}>
+                            <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className="relative mb-6">
                                     <input
-                                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                                        id="name"
-                                        name="name"
+                                        placeholder="name"
                                         type="text"
-                                        placeholder="Name"
+                                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-500"
+                                        {...register("name", {
+                                            required: true,
+                                        })}
                                     />
                                     <label
                                         className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                                         htmlFor="name">
                                         Name
                                     </label>
+                                    {errors.name && (
+                                        <span>This field is required</span>
+                                    )}{" "}
                                 </div>
                                 <div className="relative mb-6">
                                     <input
-                                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                                        id="email"
-                                        name="email"
+                                        placeholder="Url"
+                                        type="text"
+                                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-500"
+                                        {...register("image")}
+                                    />
+                                    <label
+                                        className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
+                                        htmlFor="email">
+                                        Image Url
+                                    </label>
+                                </div>
+                                <div className="relative mb-6">
+                                    <input
+                                        placeholder="email"
                                         type="email"
-                                        placeholder="Email"
-                                        required
+                                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-500"
+                                        {...register("email", {
+                                            required: true,
+                                        })}
                                     />
                                     <label
                                         className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                                         htmlFor="email">
                                         Email
                                     </label>
+                                    {errors.email && (
+                                        <span>This field is required</span>
+                                    )}
                                 </div>
                                 <div className="relative mb-6">
                                     <input
-                                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                                        id="photo"
-                                        name="photo"
-                                        type="text"
-                                        placeholder="Photo Url"
+                                        type={isHide ? "password" : "text"}
+                                        placeholder="password"
+                                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-blue-500"
+                                        {...register("password", {
+                                            required: true,
+                                            pattern: {
+                                                value: /^(?=.*?[A-Z])(?=.*?[\W_]).{6,}$/i,
+                                                message:
+                                                    "Password should have at least 6 characters, one capital letter and one special character",
+                                            },
+                                        })}
                                     />
-                                    <label
-                                        className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                                        htmlFor="email">
-                                        Photo Url
-                                    </label>
-                                </div>
-                                <div className="relative mb-6">
-                                    <input
-                                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                                        id="password"
-                                        name="password"
-                                        type="password"
-                                        placeholder="Password"
-                                        required
-                                    />
+                                    <button
+                                        className=" absolute right-1 top-4"
+                                        onClick={handleHideEye}>
+                                        {isHide ? (
+                                            <BsEyeSlash></BsEyeSlash>
+                                        ) : (
+                                            <FaEye></FaEye>
+                                        )}
+                                    </button>
+
                                     <label
                                         className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                                         htmlFor="password">
                                         Password
                                     </label>
+                                    {errors.password && (
+                                        <span>This field is required</span>
+                                    )}
+                                    {errors.password?.message && (
+                                        <p>{errors.password?.message}</p>
+                                    )}
                                 </div>
-                                <div className="relative mb-6">
-                                    <input
-                                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                                        id="confirm"
-                                        name="confirm"
-                                        type="password"
-                                        placeholder="Confirm"
-                                        required
-                                    />{" "}
-                                    <label
-                                        className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                                        htmlFor="password">
-                                        Confirm
-                                    </label>
-                                </div>
-                                <div className="mb-6">
-                                    <button
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline w-full"
-                                        type="submit">
-                                        Sign Up
-                                    </button>
-                                </div>
-                                <div className="text-center">
-                                    <span className="text-gray-700">
-                                        Or SignUp with:
-                                    </span>
+                                <input
+                                    className=" w-full mx-auto btn hover:text-white bg-blue-600 mb-4"
+                                    type="submit"
+                                />
+                            </form>
+                            <div className="text-center">
+                                <span className="text-gray-700">
+                                    Or SignUp with:
+                                </span>
 
-                                    <SocialLogin></SocialLogin>
-                                    <p className="mt-4">
-                                        Already have an account?{" "}
-                                        <Link
-                                            to="/login"
-                                            className="text-blue-500">
-                                            Sign In
-                                        </Link>
-                                    </p>
-
-                                    <p className="text-rose-700">{error}</p>
-                                    <p className="text-emerald-800">
-                                        {success}
-                                    </p>
-                                </div>
-                            </Form>
+                                <SocialLogin></SocialLogin>
+                                <p className="mt-4">
+                                    Already have an account?{" "}
+                                    <Link to="/login" className="text-blue-500">
+                                        Sign In
+                                    </Link>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
