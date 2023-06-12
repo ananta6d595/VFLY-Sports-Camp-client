@@ -49,9 +49,11 @@ const NavBar = () => {
         <>
             <div className="w-full fixed z-30">
                 <Container>
-                    <div className="grid grid-cols-3 items-center h-16  backdrop-blur-md">
+                    <div className="grid grid-cols-3 lg:grid-cols-4 items-center h-16  backdrop-blur-md">
                         <div className="dropdown lg:hidden">
-                            <label tabIndex={0} className="btn btn-ghost  ">
+                            <label
+                                tabIndex={0}
+                                className="btn  ms-6 bg-white opacity-50">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     className="h-5 w-5"
@@ -73,7 +75,7 @@ const NavBar = () => {
                             </ul>
                         </div>
                         <Logo></Logo>
-                        <div className="hidden lg:flex gap-5 justify-center text-white bg-blue-500 bg-opacity-40 p-2 rounded-3xl ">
+                        <div className="col-span-2 hidden lg:flex gap-5 justify-center text-white bg-blue-500 bg-opacity-40 p-2 rounded-3xl ">
                             {navList}
                         </div>
                         <ProfileLoginLogout></ProfileLoginLogout>

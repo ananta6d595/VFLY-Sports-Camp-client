@@ -11,14 +11,14 @@ const ProfileLoginLogout = () => {
             .catch((error) => console.log(error));
     };
     return (
-        <div className="">
+        <div className="flex w-full justify-end items-center pe-6">
             {user ? (
                 <div
                     className="tooltip tooltip-bottom "
                     data-tip={user?.displayName}>
                     {" "}
                     <div className="avatar">
-                        <div className="w-16 mask mask-hexagon ">
+                        <div className="w-14 mask mask-hexagon ">
                             <img src={user?.photoURL} className="" />
                             <img src="/src/assets/userDefault.jpg" />
                         </div>

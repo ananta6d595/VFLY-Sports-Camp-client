@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { Form, Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 // import useTitle from "../../hooks/useTitle";
 
 const SignUp = () => {
@@ -141,6 +142,11 @@ const SignUp = () => {
                                     </button>
                                 </div>
                                 <div className="text-center">
+                                    <span className="text-gray-700">
+                                        Or SignUp with:
+                                    </span>
+
+                                    <SocialLogin></SocialLogin>
                                     <p className="mt-4">
                                         Already have an account?{" "}
                                         <Link
@@ -149,6 +155,7 @@ const SignUp = () => {
                                             Sign In
                                         </Link>
                                     </p>
+
                                     <p className="text-rose-700">{error}</p>
                                     <p className="text-emerald-800">
                                         {success}

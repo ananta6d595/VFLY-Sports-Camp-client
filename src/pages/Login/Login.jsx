@@ -1,33 +1,18 @@
 import { useContext, useState } from "react";
 import { Form, Link, useLocation, useNavigate } from "react-router-dom";
-
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 // import useTitle from "../../hooks/useTitle";
 import { AuthContext } from "../../providers/AuthProvider";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const Login = () => {
     // useTitle("Login");
     const [error, setError] = useState(null);
-    const { auth, signInUser, setUser } = useContext(AuthContext);
+    const { signInUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
-    const googleProvider = new GoogleAuthProvider();
 
-    const HandelGoogleLogin = () => {
-        signInWithPopup(auth, googleProvider)
-            .then((result) => {
-                const loggedInUser = result.user;
-                setUser(loggedInUser);
-                navigate(from, { replace: true });
-                // IdP data available using getAdditionalUserInfo(result)
-                // ...
-            })
-            .catch((error) => {
-                console.log(error.message);
-            });
-    };
     const HandelSignIn = (event) => {
         event.preventDefault();
 
@@ -106,17 +91,13 @@ const Login = () => {
                                 <span className="text-gray-700">
                                     Or login with:
                                 </span>
-                                <div className="flex justify-center mt-2">
-                                    <button
-                                        onClick={HandelGoogleLogin}
-                                        className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-                                        Google
-                                    </button>
-                                </div>
+                              
+                                   <SocialLogin></SocialLogin>
+
                                 <p className="mt-4">
                                     Don&apos;t have an account?{" "}
                                     <Link
-                                        to="/registration"
+                                        to="/signup"
                                         className="text-blue-500">
                                         Sign Up
                                     </Link>
