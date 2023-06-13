@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useNavigate, useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 const SocialLogin = () => {
     const { googleSignIn } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -10,8 +11,39 @@ const SocialLogin = () => {
 
     const handleGooglSignIn = () => {
         googleSignIn().then((result) => {
-            console.log(result.user);
-            navigate(from, { replace: true });
+            // console.log(result.user);
+
+            const loggedUser = result.user;
+            const saveUser = { name: loggedUser.name, email: loggedUser.email };
+
+            fetch(`${import.meta.env.VITE_server}/users`, {
+                method: "PATCH",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify(saveUser),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.upsertedId) {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "User Saved & signIn success",
+                            timer: 1000,
+                        });
+                        navigate(from, { replace: true });
+                    } else if (data.matchedCount === 1) {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "success, Google signIn",
+                            timer: 1000,
+                        });
+                        navigate(from, { replace: true });
+                    }
+                });
         });
     };
 
