@@ -6,8 +6,12 @@ import { GiTeacher } from "react-icons/gi";
 import Swal from "sweetalert2";
 
 const ManageUsers = () => {
+    const token = localStorage.getItem('access-token');
+
     const { data: users = [], refetch } = useQuery(["users"], async () => {
-        const res = await fetch(`${import.meta.env.VITE_server}/users`);
+        const res = await fetch(`${import.meta.env.VITE_server}/users`, {
+            headers: { authorization: `bearer ${token}`
+        }});
         return await res.json();
     });
     const handleRoleChanger = (user, role) => {
@@ -31,27 +35,6 @@ const ManageUsers = () => {
                 }
             });
     };
-    // const handleMakeInstructor = (user) => {
-    //     fetch(`${import.meta.env.VITE_server}/instructor/${user._id}`, {
-    //         method: "PATCH",
-    //         headers: {
-    //             "content-type": "application/json",
-    //         },
-    //     })
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             if (data.modifiedCount) {
-    //                 refetch();
-    //                 Swal.fire({
-    //                     position: "center",
-    //                     icon: "success",
-    //                     title: `${user.name || user.email} is an instructor Now!`,
-    //                     showConfirmButton: false,
-    //                     timer: 1000,
-    //                 });
-    //             }
-    //         });
-    // };
 
     const handelDeleteUser = () => {};
     return (
@@ -78,6 +61,7 @@ const ManageUsers = () => {
                             return (
                                 <tr key={user._id}>
                                     <th>{index + 1}</th>
+
                                     <td>{user.email}</td>
                                     <td>{user.name}</td>
                                     <td>{user.role}</td>
@@ -135,3 +119,24 @@ const ManageUsers = () => {
 };
 
 export default ManageUsers;
+
+// const users = [
+//     {
+//         image: "https://images.squarespace-cdn.com/content/v1/5a2cd298f43b551b489d04fd/1583258826725-80C4PC5NSS5SNSZT1C1F/Senior-Alek-13.JPG-2.jpg?format=1000w",
+//         name: "Marjan",
+//         role: "admin",
+//         email: "alanbott@gmail.com",
+//     },
+//     {
+//         image: "https://images.squarespace-cdn.com/content/v1/5a2cd298f43b551b489d04fd/1583258826725-80C4PC5NSS5SNSZT1C1F/Senior-Alek-13.JPG-2.jpg?format=1000w",
+//         name: "Marjan",
+//         role: "instructor",
+//         email: "alanbott@gmail.com",
+//     },
+//     {
+//         image: "https://images.squarespace-cdn.com/content/v1/5a2cd298f43b551b489d04fd/1583258826725-80C4PC5NSS5SNSZT1C1F/Senior-Alek-13.JPG-2.jpg?format=1000w",
+//         name: "Marjan",
+//         role: "student",
+//         email: "alanbott@gmail.com",
+//     },
+// ];
