@@ -1,9 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
-const SideBar = ({ children }) => {
+import useAdmin from "../../hooks/useAdmin";
+import useInstructor from "../../hooks/useInstructor";
+const DashBoardMenu = ({ children }) => {
     // TODO: checking isAdmin and isInstructor dynamic
-    const isAdmin = true;
-    const isInstructor = false;
+    const [isAdmin] = useAdmin();
+
+    console.log('isAdmin in DashBoardMenu',isAdmin);
+    const [isInstructor] = useInstructor();
 
     // admin menu navigation
     const adminMenu = (
@@ -86,4 +90,4 @@ const SideBar = ({ children }) => {
     );
 };
 
-export default SideBar;
+export default DashBoardMenu;

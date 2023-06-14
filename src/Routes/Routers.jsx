@@ -14,6 +14,7 @@ import FeedBack from "../pages/DashBoard/FeedBack";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
 
 export const router = createBrowserRouter([
@@ -73,7 +74,11 @@ export const router = createBrowserRouter([
             //admin dashboard
             {
                 path: "manageClass",
-                element: <ManageClasses></ManageClasses>,
+                element: (
+                    <AdminRoute>
+                        <ManageClasses></ManageClasses>
+                    </AdminRoute>
+                ),
             },
             {
                 path: "manageUsers",

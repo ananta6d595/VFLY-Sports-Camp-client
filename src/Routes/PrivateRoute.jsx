@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Navigate, useLocation } from "react-router";
 import { AuthContext } from "../providers/AuthProvider";
+import { RevolvingDot } from "react-loader-spinner";
 
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
@@ -8,9 +9,18 @@ const PrivateRoute = ({ children }) => {
 
     if (loading) {
         return (
-            <div className="h-96 w-full pt-20">
-                <h1>loading...</h1>
-                {/* <img src="/src/assets/giphy.webp" className="h-28 mx-auto" /> */}
+            <div>
+                <RevolvingDot
+                    height="100"
+                    width="100"
+                    radius="6"
+                    color="#4fa94d"
+                    secondaryColor=""
+                    ariaLabel="revolving-dot-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                />
             </div>
         );
     }
