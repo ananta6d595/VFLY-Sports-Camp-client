@@ -1,5 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../components/SectionTitle";
 import useAuth from "../../hooks/useAuth";
+import { NavLink } from "react-router-dom";
 
 /*  Each Class will show relevant information, including **pending/ approved/ denied** status, **Total Enrolled Students**, **Feedback** & **Update button**.
     - **Total Enrolled Students:** Initially it will be zero. If any student has successfully booked the Class, show the total number of students.
@@ -8,40 +10,18 @@ import useAuth from "../../hooks/useAuth";
         - If the Class is in the denied state by the admin, at that time, an admin can write feedback explaining why the Class was denied, which will appear in the feedback column. */
 const InstructorClasses = () => {
     const { user } = useAuth();
-    const classes = [
-        {
-            image: "https://images.squarespace-cdn.com/content/v1/5a2cd298f43b551b489d04fd/1583258826725-80C4PC5NSS5SNSZT1C1F/Senior-Alek-13.JPG-2.jpg?format=1000w",
-            name: "FootBall Class",
+    const token = localStorage.getItem("access-token");
+    const { data: classes = [] } = useQuery(["classes"], async () => {
+        const res = await fetch(
+            `${import.meta.env.VITE_server}/instructor/classes/${user.email}`,
+            {
+                headers: { authorization: `bearer ${token}` },
+            }
+        );
+        return await res.json();
+    });
 
-            seats_available: 12,
-            enrolled: 0,
-            status: "denied",
-            feedback:
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod deleniti ratione nobis hic nulla? Fugit, voluptatibus quidem, facere velit a voluptatum est distinctio eaque architecto incidunt nulla eius necessitatibus mollitia.",
-            price: 234,
-        },
-        {
-            image: "https://images.squarespace-cdn.com/content/v1/5a2cd298f43b551b489d04fd/1583258826725-80C4PC5NSS5SNSZT1C1F/Senior-Alek-13.JPG-2.jpg?format=1000w",
-            name: "FootBall Class",
-
-            seats_available: 0,
-            enrolled: 0,
-            status: "pending",
-            feedback: "",
-            price: 234,
-        },
-        {
-            image: "https://static.wixstatic.com/media/70ef0f_39572f6d49be4dcf8426156377dcab39~mv2.png/v1/fill/w_864,h_486,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/summer%20camp%20free%20kick%202023.png",
-            name: "FootBall Class",
-
-            seats_available: 25,
-            enrolled: 0,
-            status: "pending",
-            feedback:
-                "",
-            price: 234,
-        },
-    ];
+    console.log(classes);
     return (
         <div>
             <div className="pt-2"></div>
@@ -67,11 +47,11 @@ const InstructorClasses = () => {
                             return (
                                 <tr key={index}>
                                     <th>{index + 1}</th>
-                                    <td>{classDetail.name}</td>
+                                    <td>{classDetail.className}</td>
                                     <td>{user.displayName}</td>
                                     <td>{user.email}</td>
                                     <td>{classDetail.price}</td>
-                                    <td>{classDetail.seats_available}</td>
+                                    <td>{classDetail.availableSeats}</td>
                                     <td>{classDetail.enrolled}</td>
                                     <td>{classDetail.status}</td>
                                     <td>
@@ -84,9 +64,11 @@ const InstructorClasses = () => {
                                         )}
                                     </td>
                                     <td>
+                                        <NavLink to={'/updateClass'}>
                                         <button className="btn btn-success">
                                             Update
                                         </button>
+                                        </NavLink>
                                     </td>
                                 </tr>
                             );

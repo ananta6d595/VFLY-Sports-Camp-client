@@ -2,16 +2,11 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
-const AddClass = () => {
+
+const UpdateClass = () => {
     const { user } = useAuth();
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        reset,
-        formState: { errors },
-    } = useForm();
+    const { register, handleSubmit, watch, reset } = useForm();
     const onSubmit = (data) => {
         // console.log(data);
         const saveNewClass = {
@@ -26,7 +21,7 @@ const AddClass = () => {
         };
         // // fetch(`${import.meta.env.VITE_server}/classes`)
         axios
-            .post(
+            .patch(
                 `${import.meta.env.VITE_server}/instructor/addClass`,
                 saveNewClass
             )
@@ -37,7 +32,7 @@ const AddClass = () => {
                     Swal.fire({
                         position: "center",
                         icon: "success",
-                        title: "New Class added for pending ",
+                        title: "Signed Up",
                         timer: 1000,
                     });
                 }
@@ -65,11 +60,8 @@ const AddClass = () => {
                         <input
                             className="input-field w-full"
                             placeholder="Class Name"
-                            {...register("className", { required: true })}
+                            {...register("className")}
                         />
-                        {errors.className?.type === "required" && (
-                            <p className="text-red-500">Class Name is required</p>
-                        )}
                     </div>
                     {/* // TODO: Upload image in imgbb */}
                     <div className="mb-9">
@@ -86,11 +78,8 @@ const AddClass = () => {
                         <input
                             className="input-field w-full "
                             placeholder="Seat Number"
-                            {...register("availableSeats", { required: true })}
+                            {...register("availableSeats")}
                         />
-                        {errors.availableSeats?.type === "required" && (
-                            <p className="text-red-500"> required</p>
-                        )}
                     </div>
 
                     <div className="mb-9">
@@ -98,11 +87,8 @@ const AddClass = () => {
                         <input
                             className="input-field w-full"
                             placeholder="Price in USD"
-                            {...register("price", { required: true })}
+                            {...register("price")}
                         />
-                        {errors.price?.type === "required" && (
-                            <p className="text-red-500"> required</p>
-                        )}
                     </div>
                 </div>
                 <button className="btn btn-primary italic w-full" type="submit">
@@ -114,4 +100,4 @@ const AddClass = () => {
     );
 };
 
-export default AddClass;
+export default UpdateClass;

@@ -6,7 +6,7 @@ const DashBoardMenu = ({ children }) => {
     // TODO: checking isAdmin and isInstructor dynamic
     const [isAdmin] = useAdmin();
 
-    console.log('isAdmin in DashBoardMenu',isAdmin);
+    // console.log('isAdmin in DashBoardMenu',isAdmin);
     const [isInstructor] = useInstructor();
 
     // admin menu navigation
