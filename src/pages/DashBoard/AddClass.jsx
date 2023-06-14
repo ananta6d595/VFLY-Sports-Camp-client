@@ -1,11 +1,37 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
 const AddClass = () => {
     const { user } = useAuth();
 
-
-    const { register, handleSubmit, watch } = useForm();
-    const onSubmit = (data) => console.log(data);
+    const { register, handleSubmit, watch, reset } = useForm();
+    const onSubmit = (data) => {
+        console.log(data);
+        const saveNewClass = {
+            className: data.className,
+            classImage: data.classImage,
+            availableSeats: data.availableSeats,
+            price: data.price,
+            instructor_name: user.displayName,
+            instructor_mail: user.email,
+            status: "pending",
+        };
+        // // fetch(`${import.meta.env.VITE_server}/classes`)
+        axios
+            .post(`${import.meta.env.VITE_server}/instructor/addClass`, saveNewClass)
+            .then((dataObj) => {
+                // console.log(dataObj);
+                if (dataObj.data.insertedId) {
+                    reset();
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Signed Up",
+                        timer: 1000,
+                    });
+                }});
+    };
 
     console.log(watch("example"));
     return (
@@ -13,10 +39,10 @@ const AddClass = () => {
             <div className="md:flex gap-9">
                 <h1 className="italic mb-2">
                     {" "}
-                    <span className="badge">Instructor:</span> Alek bott
+                    <span className="badge">Instructor:</span> {user.displayName}
                 </h1>
                 <h1 className="italic mb-12">
-                    <span className="badge">Email:</span> Alekbott@gmail.com
+                    <span className="badge">Email:</span>{user.email}
                 </h1>
             </div>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -35,7 +61,7 @@ const AddClass = () => {
                         <input
                             className="input-field w-full"
                             placeholder="Image Url"
-                            {...register("uploadImage")}
+                            {...register("classImage")}
                         />
                     </div>
 

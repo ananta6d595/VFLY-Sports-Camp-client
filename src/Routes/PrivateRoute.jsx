@@ -9,18 +9,19 @@ const PrivateRoute = ({ children }) => {
 
     if (loading) {
         return (
-            <div>
+            <div className=" w-full pt-[10%]">
                 <RevolvingDot
                     height="100"
                     width="100"
-                    radius="6"
+                    radius="40"
                     color="#4fa94d"
-                    secondaryColor=""
+                    secondaryColor="#4fa94a"
                     ariaLabel="revolving-dot-loading"
-                    wrapperStyle={{}}
-                    wrapperClass=""
+                    wrapperStyle={{ height: 300, width: 300 }}
+                    wrapperClass=" mx-auto"
                     visible={true}
                 />
+
             </div>
         );
     }
