@@ -1,13 +1,13 @@
-import { useContext, useState } from "react";
 import { Form, Link, useLocation, useNavigate } from "react-router-dom";
 // import useTitle from "../../hooks/useTitle";
-import { AuthContext } from "../../providers/AuthProvider";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
 
 const Login = () => {
     // useTitle("Login");
     const [error, setError] = useState(null);
-    const { signInUser } = useContext(AuthContext);
+    const { signInUser } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -91,7 +91,7 @@ const Login = () => {
                                 <span className="text-gray-700">
                                     Or login with:
                                 </span>
-                              
+
                                    <SocialLogin></SocialLogin>
 
                                 <p className="mt-4">

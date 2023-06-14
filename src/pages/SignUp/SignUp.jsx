@@ -40,7 +40,11 @@ const SignUp = () => {
                     photoURL: data.image,
                 }).then(() => {
                     // save user in mongodb
-                    const saveUser = { name: data.name, email: data.email };
+                    const saveUser = {
+                        name: data.name,
+                        email: data.email,
+                        image: data.image,
+                    };
                     fetch(`${import.meta.env.VITE_server}/users`, {
                         method: "PATCH",
                         headers: {

@@ -1,5 +1,9 @@
 import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
 const AddClass = () => {
+    const { user } = useAuth();
+
+
     const { register, handleSubmit, watch } = useForm();
     const onSubmit = (data) => console.log(data);
 
