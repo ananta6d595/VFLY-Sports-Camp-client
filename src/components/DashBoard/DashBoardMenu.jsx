@@ -42,23 +42,23 @@ const DashBoardMenu = ({ children }) => {
         </>
     );
     return (
-        <div>
-            <div className="drawer lg:drawer-open">
+        <>
+            <div className="drawer lg:drawer-open z-10">
                 <input
                     id="my-drawer-2"
                     type="checkbox"
                     className="drawer-toggle"
                 />
-                <div className="drawer-content  items-center md:pt-9">
+                <div className="drawer-content  items-center md:pt-2">
                     <label
                         htmlFor="my-drawer-2"
-                        className=" drawer-button lg:hidden">
+                        className="fixed drawer-button lg:hidden">
                         <RxHamburgerMenu className="ms-2 mt-3"/>
                     </label>
                     {/* Page content here */}
                     {children}
                 </div>
-                <div className="drawer-side ">
+                <div className="drawer-side md:z-20">
                     <label
                         htmlFor="my-drawer-2"
                         className="drawer-overlay "></label>
@@ -86,7 +86,7 @@ const DashBoardMenu = ({ children }) => {
                     </ul>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

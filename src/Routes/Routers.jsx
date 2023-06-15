@@ -100,7 +100,7 @@ export const router = createBrowserRouter([
                 ),
             },
             {
-                path: "manageClass/feedback",
+                path: "manageClass/feedback/:id",
                 element: (
                     <AdminRoute>
                         <FeedBack></FeedBack>,

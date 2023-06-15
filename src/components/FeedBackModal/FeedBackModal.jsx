@@ -1,7 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-const FeedBackModal = () => {
+const FeedBackModal = ({feedback}) => {
     let [isOpen, setIsOpen] = useState(false);
+
+        console.log(feedback);
 
     function closeModal() {
         setIsOpen(false);
@@ -54,7 +56,7 @@ const FeedBackModal = () => {
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
-                                            Feedback from server
+                                            {feedback}
                                         </p>
                                     </div>
 

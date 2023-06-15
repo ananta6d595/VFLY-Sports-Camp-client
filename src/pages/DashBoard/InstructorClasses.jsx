@@ -57,7 +57,10 @@ const InstructorClasses = () => {
                                     <td>{classDetail.status}</td>
                                     <td>
                                         {classDetail.status == "denied" ? (
-                                            <FeedBackModal></FeedBackModal>
+                                            <FeedBackModal
+                                                feedback={
+                                                    classDetail.feedback
+                                                }></FeedBackModal>
                                         ) : (
                                             "No feedback"
                                         )}
