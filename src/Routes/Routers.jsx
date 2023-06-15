@@ -72,9 +72,16 @@ export const router = createBrowserRouter([
                 element: <InstructorClasses></InstructorClasses>,
             },
             {
-                path: "updateClass",
+                path: "instructorClasses/updateClass/:id",
                 element: <UpdateClass></UpdateClass>,
+                loader: ({ params }) =>
+                    fetch(
+                        `${import.meta.env.VITE_server}/instructor/class/${
+                            params.id
+                        }`
+                    ),
             },
+
             //admin dashboard
             {
                 path: "manageClass",

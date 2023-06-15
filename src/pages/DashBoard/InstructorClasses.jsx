@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import SectionTitle from "../../components/SectionTitle";
 import useAuth from "../../hooks/useAuth";
 import { NavLink } from "react-router-dom";
+import FeedBackModal from "../../components/FeedBackModal/FeedBackModal";
 
 /*  Each Class will show relevant information, including **pending/ approved/ denied** status, **Total Enrolled Students**, **Feedback** & **Update button**.
     - **Total Enrolled Students:** Initially it will be zero. If any student has successfully booked the Class, show the total number of students.
@@ -21,7 +22,7 @@ const InstructorClasses = () => {
         return await res.json();
     });
 
-    console.log(classes);
+    // console.log(classes);
     return (
         <div>
             <div className="pt-2"></div>
@@ -38,7 +39,7 @@ const InstructorClasses = () => {
                             <th>Available seats</th>
                             <th>Enrolled</th>
                             <th>Status</th>
-                            <th></th>
+                            <th>FeedBack</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -56,18 +57,17 @@ const InstructorClasses = () => {
                                     <td>{classDetail.status}</td>
                                     <td>
                                         {classDetail.status == "denied" ? (
-                                            <button className="btn bg-yellow-300">
-                                                Feed Back
-                                            </button>
+                                            <FeedBackModal></FeedBackModal>
                                         ) : (
                                             "No feedback"
                                         )}
                                     </td>
                                     <td>
-                                        <NavLink to={'/updateClass'}>
-                                        <button className="btn btn-success">
-                                            Update
-                                        </button>
+                                        <NavLink
+                                            to={`updateClass/${classDetail._id}`}>
+                                            <button className="btn btn-success">
+                                                Update
+                                            </button>
                                         </NavLink>
                                     </td>
                                 </tr>

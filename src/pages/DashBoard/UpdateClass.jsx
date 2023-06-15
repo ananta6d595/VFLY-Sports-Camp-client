@@ -1,47 +1,52 @@
 import { useForm } from "react-hook-form";
-import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import { useLoaderData } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import SectionTitle from "../../components/SectionTitle";
 const UpdateClass = () => {
     const { user } = useAuth();
+    const { _id, className, classImage, availableSeats, price } =
+        useLoaderData();
+    console.log(className, classImage, availableSeats, price);
 
-    const { register, handleSubmit, watch, reset } = useForm();
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm();
+
     const onSubmit = (data) => {
-        // console.log(data);
-        const saveNewClass = {
-            className: data.className,
-            classImage: data.classImage,
-            availableSeats: data.availableSeats,
-            price: data.price,
-            enrolled: 0,
-            instructor_name: user.displayName,
-            instructor_mail: user.email,
-            status: "pending",
+        const saveUpdateClass = {
+            className: data.className || className,
+            classImage: data.classImage || classImage,
+            availableSeats: data.availableSeats || availableSeats,
+            price: data.price || price,
         };
-        // // fetch(`${import.meta.env.VITE_server}/classes`)
+
+        // send update to server
         axios
             .patch(
-                `${import.meta.env.VITE_server}/instructor/addClass`,
-                saveNewClass
+                `${import.meta.env.VITE_server}/instructor/updateClass/${_id}`,
+                saveUpdateClass
             )
             .then((dataObj) => {
-                // console.log(dataObj);
                 if (dataObj.data.insertedId) {
                     reset();
                     Swal.fire({
                         position: "center",
                         icon: "success",
-                        title: "Signed Up",
+                        title: "New Class added for pending ",
                         timer: 1000,
                     });
                 }
             });
     };
 
-    console.log(watch("example"));
     return (
         <div className=" p-2 md:px-12 md:w-[800px] lg:w-2/3  mx-auto">
+            <SectionTitle heading={"Update a Class"}></SectionTitle>
             <div className="md:flex gap-9">
                 <h1 className="italic mb-2">
                     {" "}
@@ -59,16 +64,21 @@ const UpdateClass = () => {
                         <h4 className="italic">Class Name</h4>
                         <input
                             className="input-field w-full"
-                            placeholder="Class Name"
+                            placeholder={className}
                             {...register("className")}
                         />
+                        {errors.className?.type === "required" && (
+                            <p className="text-red-500">
+                                Class Name is required
+                            </p>
+                        )}
                     </div>
-                    {/* // TODO: Upload image in imgbb */}
+
                     <div className="mb-9">
                         <h4 className="italic"> Upload Image </h4>
                         <input
                             className="input-field w-full"
-                            placeholder="Image Url"
+                            placeholder={classImage}
                             {...register("classImage")}
                         />
                     </div>
@@ -77,23 +87,29 @@ const UpdateClass = () => {
                         <h4 className="italic"> Available Seats </h4>
                         <input
                             className="input-field w-full "
-                            placeholder="Seat Number"
+                            placeholder={availableSeats}
                             {...register("availableSeats")}
                         />
+                        {errors.availableSeats?.type === "required" && (
+                            <p className="text-red-500"> required</p>
+                        )}
                     </div>
 
                     <div className="mb-9">
                         <h4 className="italic">Price </h4>
                         <input
                             className="input-field w-full"
-                            placeholder="Price in USD"
+                            placeholder={price}
                             {...register("price")}
                         />
+                        {errors.price?.type === "required" && (
+                            <p className="text-red-500"> required</p>
+                        )}
                     </div>
                 </div>
                 <button className="btn btn-primary italic w-full" type="submit">
                     {" "}
-                    Add
+                    Update
                 </button>
             </form>
         </div>
