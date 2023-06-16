@@ -8,7 +8,7 @@ const AddClass = () => {
     const {
         register,
         handleSubmit,
-        watch,
+        // watch,
         reset,
         formState: { errors },
     } = useForm();
@@ -44,7 +44,7 @@ const AddClass = () => {
             });
     };
 
-    console.log(watch("example"));
+    // console.log(watch("example"));
     return (
         <div className=" p-2 md:px-12 md:w-[800px] lg:w-2/3  mx-auto">
             <div className="md:flex gap-9">

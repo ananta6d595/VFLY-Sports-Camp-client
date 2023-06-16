@@ -43,6 +43,7 @@ const MySelectedClasses = () => {
                             <th>Instructor</th>
                             <th>Email</th>
                             <th>Seats</th>
+                            <th>Price USD</th>
                             <th className="bg-rose-400">Delete</th>
                             <th>Pay</th>
                         </tr>
@@ -56,6 +57,7 @@ const MySelectedClasses = () => {
                                 className,
                                 instructor_mail,
                                 instructor_name,
+                                price
 
                             } = classData;
 
@@ -66,15 +68,16 @@ const MySelectedClasses = () => {
                                     <td>{instructor_name}</td>
                                     <td>{instructor_mail}</td>
                                     <td>{availableSeats}</td>
+                                    <td>$   {price}</td>
                                     <td>
                                         <button
-                                            onClick={()=>handleDelete(_id)}
+                                            onClick={() => handleDelete(_id)}
                                             className="btn bg-rose-400 hover:bg-rose-600 hover:text-white">
                                             Delete
                                         </button>
                                     </td>
                                     <td>
-                                        <NavLink>
+                                        <NavLink to={"payment"}>
                                             {" "}
                                             <button className="btn bg-cyan-400 hover:bg-blue-500 hover:text-white">
                                                 Pay Now

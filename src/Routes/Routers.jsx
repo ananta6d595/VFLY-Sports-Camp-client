@@ -16,11 +16,14 @@ import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import UpdateClass from "../pages/DashBoard/UpdateClass";
+import PaymentPage from "../Payment/PaymentPage";
+import ErrorPage from "../pages/ErrorPage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "/",
@@ -51,6 +54,7 @@ export const router = createBrowserRouter([
                 <Dashboard></Dashboard>
             </PrivateRoute>
         ),
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             //student dashboard
             {
@@ -60,6 +64,10 @@ export const router = createBrowserRouter([
             {
                 path: "enrolledClass",
                 element: <MyEnrolledClasses></MyEnrolledClasses>,
+            },
+            {
+                path: "selectedClass/payment",
+                element: <PaymentPage></PaymentPage>,
             },
 
             //instructor dashboard
