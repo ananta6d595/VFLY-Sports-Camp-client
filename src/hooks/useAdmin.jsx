@@ -8,7 +8,7 @@ const useAdmin = () => {
     const { data: isAdmin = false, isLoading: isAdminLoading } = useQuery({
         queryKey: ["isAdmin", user?.email],
         queryFn: async () => {
-            const res = await fetch(`${import.meta.env.VITE_server}/isAdmin/${user.email}`, {
+            const res = await fetch(`${import.meta.env.VITE_server}/isAdmin/${user?.email}`, {
                 headers: { authorization: `bearer ${token}` },
             });
             return await res.json();

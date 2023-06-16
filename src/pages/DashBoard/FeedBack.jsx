@@ -13,15 +13,14 @@ const FeedBack = () => {
         const saveUpdateClass = {
             feedback: data.feedback,
         };
-        console.log(data.feedback);
+        // console.log(data.feedback);
         // send update to server
-        axios
-            .patch(
+        axios.patch(
                 `${import.meta.env.VITE_server}/feedBack/${id}`,
                 saveUpdateClass
             )
             .then((dataObj) => {
-                console.log(dataObj);
+                // console.log(dataObj);
                 if (dataObj.data.modifiedCount) {
                     Swal.fire({
                         position: "center",

@@ -42,6 +42,9 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
             setUser(loggedUser);
+
+            // console.log("user in AuthContext:", loggedUser.email);
+
             // get and set token
             if (loggedUser) {
                 axios.post(`${import.meta.env.VITE_server}/jwt`, {
