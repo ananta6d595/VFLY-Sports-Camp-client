@@ -7,6 +7,7 @@ import { FiUsers } from "react-icons/fi";
 import { HiOutlineHome } from "react-icons/hi";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { BiBookmarkAlt } from "react-icons/bi";
+import { GrRadialSelected } from "react-icons/gr";
 const DashBoardMenu = ({ children }) => {
     // TODO: checking isAdmin and isInstructor dynamic
     const [isAdmin] = useAdmin();
@@ -45,7 +46,7 @@ const DashBoardMenu = ({ children }) => {
     const studentMenu = (
         <>
             <li>
-                <NavLink to="selectedClass">My Selected Classes</NavLink>
+                <NavLink to="selectedClass"><GrRadialSelected></GrRadialSelected>My Selected Classes</NavLink>
             </li>
             <li>
                 <NavLink to="enrolledClass">My Enrolled Classes</NavLink>
