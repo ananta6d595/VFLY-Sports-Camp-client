@@ -2,6 +2,11 @@ import { NavLink } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import useAdmin from "../../hooks/useAdmin";
 import useInstructor from "../../hooks/useInstructor";
+import { MdOutlineStackedLineChart } from "react-icons/md";
+import { FiUsers } from "react-icons/fi";
+import { HiOutlineHome } from "react-icons/hi";
+import { AiOutlineAppstoreAdd } from "react-icons/ai";
+import { BiBookmarkAlt } from "react-icons/bi";
 const DashBoardMenu = ({ children }) => {
     // TODO: checking isAdmin and isInstructor dynamic
     const [isAdmin] = useAdmin();
@@ -13,10 +18,16 @@ const DashBoardMenu = ({ children }) => {
     const adminMenu = (
         <>
             <li>
-                <NavLink to="manageClass">Manage Classes</NavLink>
+                <NavLink to="manageClass">
+                    {" "}
+                    <MdOutlineStackedLineChart></MdOutlineStackedLineChart>{" "}
+                    Manage Classes
+                </NavLink>
             </li>
             <li>
-                <NavLink to="manageUsers">Manage Users</NavLink>
+                <NavLink to="manageUsers">
+                    <FiUsers></FiUsers> Manage Users
+                </NavLink>
             </li>
         </>
     );
@@ -24,10 +35,10 @@ const DashBoardMenu = ({ children }) => {
     const instructorMenu = (
         <>
             <li>
-                <NavLink to="addClass">Add a Class</NavLink>
+                <NavLink to="addClass"><AiOutlineAppstoreAdd></AiOutlineAppstoreAdd> Add a Class</NavLink>
             </li>
             <li>
-                <NavLink to="instructorClasses">My Classes</NavLink>
+                <NavLink to="instructorClasses"><BiBookmarkAlt></BiBookmarkAlt>My Classes</NavLink>
             </li>
         </>
     );
@@ -81,7 +92,7 @@ const DashBoardMenu = ({ children }) => {
                             <div className="divider"></div>
                         </li>
                         <li>
-                            <NavLink to="/">Home</NavLink>
+                            <NavLink to="/"><HiOutlineHome></HiOutlineHome> Home</NavLink>
                         </li>
                     </ul>
                 </div>

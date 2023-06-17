@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 const MySelectedClasses = () => {
     const { user } = useAuth();
     const token = localStorage.getItem("access-token");
-    const { data: classes = [], refetch } = useQuery(["classes"], async () => {
+    const { data: classes = [], refetch } = useQuery(["selectedClasses"], async () => {
         const res = await fetch(
             `${import.meta.env.VITE_server}/selectedClasses/${user.email}`,
             {
@@ -17,6 +17,7 @@ const MySelectedClasses = () => {
         );
         return await res.json();
     });
+    
 
     const handleDelete = (id) => {
         // console.log(id);
