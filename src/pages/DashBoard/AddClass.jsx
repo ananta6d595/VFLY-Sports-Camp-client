@@ -17,7 +17,7 @@ const AddClass = () => {
         const saveNewClass = {
             className: data.className,
             classImage: data.classImage,
-            availableSeats: data.availableSeats,
+            availableSeats: parseInt(data.availableSeats),
             price: data.price,
             enrolled: 0,
             instructor_name: user.displayName,

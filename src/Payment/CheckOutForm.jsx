@@ -107,9 +107,12 @@ import {
 } from "@stripe/react-stripe-js";
 import useAuth from "../hooks/useAuth";
 import { CgSpinner } from "react-icons/cg";
+import axios from "axios";
+import Swal from "sweetalert2";
 // import toast from "react-hot-toast";
 
-export default function CheckoutForm({ price }) {
+export default function CheckoutForm({ classData }) {
+    const { _id, price } = classData;
     const stripe = useStripe();
     const elements = useElements();
     const { user } = useAuth();
@@ -117,11 +120,7 @@ export default function CheckoutForm({ price }) {
     const [cardError, setCardError] = useState("");
     const [clientSecret, setClientSecret] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-
-
     useEffect(() => {
-
-
         if (price > 0) {
             // console.log(price);
             fetch(`${import.meta.env.VITE_server}/create-payment-intent`, {
@@ -138,39 +137,6 @@ export default function CheckoutForm({ price }) {
                 });
         }
     }, [price]);
-
-    // useEffect(() => {
-    //     if (!stripe) {
-    //         return;
-    //     }
-
-    //     const clientSecret = new URLSearchParams(window.location.search).get(
-    //         "payment_intent_client_secret"
-    //     );
-
-    //     if (!clientSecret) {
-    //         return;
-    //     }
-
-    //     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-    //         switch (paymentIntent.status) {
-    //             case "succeeded":
-    //                 setMessage("Payment succeeded!");
-    //                 break;
-    //             case "processing":
-    //                 setMessage("Your payment is processing.");
-    //                 break;
-    //             case "requires_payment_method":
-    //                 setMessage(
-    //                     "Your payment was not successful, please try again."
-    //                 );
-    //                 break;
-    //             default:
-    //                 setMessage("Something went wrong.");
-    //                 break;
-    //         }
-    //     });
-    // }, [stripe]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -222,32 +188,36 @@ export default function CheckoutForm({ price }) {
         if (paymentIntent.status === "succeeded") {
             // save payment information to the server
             const paymentInfo = {
-                // ...bookingInfo,
-                transactionId: paymentIntent.id,
+                user: user.email,
+                class_Id: _id,
+                transaction_Id: paymentIntent.id,
                 date: new Date(),
             };
 
-            console.log("paymentInfo", paymentInfo);
+            // console.log("paymentInfo", paymentInfo);
             // TODO: update increase enrolled student number and decrease available student from class
-            // axiosSecure.post("/bookings", paymentInfo).then((res) => {
-            //     console.log(res.data);
-            //     if (res.data.insertedId) {
 
-            //         // updateStatus(bookingInfo.roomId, true)
-            //             // .then((data) => {
-                         setIsLoading(false);
-            //             //     console.log(data);
-            //             //     const text = `Booking Successful!, TransactionId: ${paymentIntent.id}`;
-            //             //     toast.success(text);
-            //             //     navigate("/dashboard/my-bookings");
-            //             // })
-            //             // .catch((err) => console.log(err));
-            //     }
-            // });
+            axios
+                .patch(
+                    `${import.meta.env.VITE_server}/afterPayment`,
+                    paymentInfo
+                )
+                .then((dataObj) => {
+                    console.log(dataObj);
+                    // if (dataObj.data.modifiedCount) {
+                        Swal.fire({
+                            position: "center",
+                            icon: "info",
+                            title: "Payment Complete!",
+                            timer: 1500,
+                        });
+                    // }
+                });
+
+            setIsLoading(false);
+
         }
     };
-
-
 
     return (
         <form id="payment-form" onSubmit={handleSubmit}>
@@ -267,7 +237,10 @@ export default function CheckoutForm({ price }) {
                     },
                 }}
             />
-            <button  className="mt-4" disabled={isLoading || !stripe || !elements} id="submit">
+            <button
+                className="mt-4"
+                disabled={isLoading || !stripe || !elements}
+                id="submit">
                 <span className="btn bg-blue-800 text-white hover:bg-blue-400  font-bold italic uppercase">
                     {isLoading ? (
                         <CgSpinner className="m-auto animate-spin" size={24} />

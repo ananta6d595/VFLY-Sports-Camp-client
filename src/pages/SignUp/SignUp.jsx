@@ -170,8 +170,9 @@ const SignUp = () => {
                                     )}
                                 </div>
                                 <input
-                                    className=" w-full mx-auto btn hover:text-white bg-blue-600 mb-4"
+                                    className=" w-full mx-auto btn  bg-blue-600 mb-4"
                                     type="submit"
+                                    value="Sign up"
                                 />
                             </form>
                             <div className="text-center">

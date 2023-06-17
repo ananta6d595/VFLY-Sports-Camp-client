@@ -19,7 +19,7 @@ const MySelectedClasses = () => {
     });
 
     const handleDelete = (id) => {
-        console.log(id);
+        // console.log(id);
         Swal.fire({
             position: "center",
             icon: "warning",
@@ -77,7 +77,7 @@ const MySelectedClasses = () => {
                                         </button>
                                     </td>
                                     <td>
-                                        <NavLink to={`payment/${price}`}>
+                                        <NavLink to={`payment/${_id}`}>
                                             {" "}
                                             <button className="btn bg-cyan-400 hover:bg-blue-500 hover:text-white">
                                                 Pay Now
