@@ -17,11 +17,11 @@ const PopularClasses = () => {
                             <figure>
                                 <img
                                     src="https://www.verywellmind.com/thmb/SPqTAvsJjBz-lc2bDPswFeHXj-w=/3867x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-463029351-56990fc23df78cafda900169.jpg"
-                                    alt="Shoes"
+
                                 />
                             </figure>
                             <div className="card-body">
-                                <h2 className="card-title">Shoes!</h2>
+                                <h2 className="card-title">football</h2>
                                 <p>
                                     If a dog chews shoes whose shoes does he
                                     choose?

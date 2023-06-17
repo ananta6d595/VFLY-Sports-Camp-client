@@ -77,7 +77,7 @@ const MySelectedClasses = () => {
                                         </button>
                                     </td>
                                     <td>
-                                        <NavLink to={"payment"}>
+                                        <NavLink to={`payment/${price}`}>
                                             {" "}
                                             <button className="btn bg-cyan-400 hover:bg-blue-500 hover:text-white">
                                                 Pay Now
