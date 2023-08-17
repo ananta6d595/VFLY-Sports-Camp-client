@@ -9,12 +9,12 @@
 
 Link link: [VFLY CAMPS](https://sports-camp-a12.web.app/).
 
-To login as admin and access Admin dashboard: 
-email: ph@gmail.com
-password: ASD!@#
+To login as admin and access Admin dashboard:  
+email: ph@gmail.com  
+password: ASD!@#  
 
-To login as Instructor and access instructor dashboard:
-email: luke@gmail.com
-password: ASD!@#
+To login as Instructor and access instructor dashboard:  
+email: luke@gmail.com  
+password: ASD!@#  
 
-To login as Student create new user and access student dashboard.
+To login as Student create new user and access student dashboard.  
