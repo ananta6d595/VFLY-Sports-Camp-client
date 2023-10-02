@@ -16,18 +16,16 @@ const Home = () => {
                     <div className="relative h-[700px] md:h-[500px] ">
                         <CampFire></CampFire>
 
-                        <div className=" absolute w-full md:w-[50%]  md:left-[30%] md:mt-12 bg-gradient-to-t from-orange-800 to-blue-700 text-primary-content">
-                            <div className="card-body">
-                                <h2 className="card-title font-bold text-4xl ">
-                                    Voucher
-                                </h2>
-                                <p>
-                                    Only for today, Hurry!
-                                </p>
-                                <div className="card-actions justify-end">
-                                    <button className="btn">
-                                        GET it
-                                    </button>
+                        <div className=" absolute w-[100%]">
+                            <div className="w-full md:w-[70%] md:mx-auto md:mt-12 bg-gradient-to-t from-orange-300 to-blue-600 text-primary-content rounded-3xl">
+                                <div className="card-body">
+                                    <h2 className="text-4xl font-bold card-title ">
+                                        Voucher
+                                    </h2>
+                                    <p>Only for today, Hurry!</p>
+                                    <div className="justify-end card-actions">
+                                        <button className="btn">GET it</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

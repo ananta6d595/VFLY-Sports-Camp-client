@@ -11,8 +11,8 @@ const ProfileLoginLogout = () => {
             .catch((error) => console.log(error));
     };
     return (
-        <div className="flex w-full justify-end items-center pe-6">
-            {user ? (
+        <div className="flex items-center justify-end w-full pe-6">
+            {user ? ( 
                 <div
                     className="tooltip tooltip-bottom "
                     data-tip={user?.displayName}>
@@ -31,13 +31,13 @@ const ProfileLoginLogout = () => {
                 // <Link to="/">
                 <button
                     onClick={handleLogOut}
-                    className="btn inline-flex items-center rounded-md bg-cyan-700 hover:bg-cyan-500 border-0 text-white">
+                    className="inline-flex items-center text-white border-0 rounded-md btn bg-cyan-700 hover:bg-cyan-500">
                     Logout
                 </button>
             ) : (
                 // </Link>
                 <Link to="/login">
-                    <button className="btn inline-flex items-center rounded-md bg-cyan-700 hover:bg-cyan-500 border-0 text-white">
+                    <button className="inline-flex items-center text-white border-0 rounded-md btn bg-cyan-700 hover:bg-cyan-500">
                         Login
                     </button>
                 </Link>

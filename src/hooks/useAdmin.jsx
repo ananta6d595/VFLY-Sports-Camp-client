@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 
-// TODO: need improvments like do isAdmin and is Instructor in one function.
+// TODO: need improvments like do isAdmin and isInstructor in one function.
 const useAdmin = () => {
     const token = localStorage.getItem("access-token");
     const { user } = useAuth();

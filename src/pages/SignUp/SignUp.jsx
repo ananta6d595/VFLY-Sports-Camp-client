@@ -28,6 +28,7 @@ const SignUp = () => {
         event.preventDefault();
         setHide(!isHide);
     };
+    
     const onSubmit = (data) => {
         // console.log(data);
         // console.log(import.meta.env.VITE_server);

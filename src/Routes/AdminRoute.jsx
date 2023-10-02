@@ -10,7 +10,7 @@ const AdminRoute = ({ children }) => {
 
     if (loading || isAdminLoading) {
         return (
-            <div className="h-96 w-full pt-20">
+            <div className="w-full pt-20 h-96">
                 <div className=" w-full pt-[10%]">
                     <RevolvingDot
                         height="100"
@@ -23,19 +23,19 @@ const AdminRoute = ({ children }) => {
                         wrapperClass=" mx-auto"
                         visible={true}
                     />
-                <h1 className="h-28 mx-auto">Loading admin dashboard...</h1>
+                <h1 className="mx-auto h-28">Loading admin dashboard...</h1>
                 </div>
             </div>
         );
     }
 
-    // console.log("user",user);
-    // console.log("isAdmin in admin route",isAdmin);
     if (user && isAdmin) {
         return children;
     }
 
-    return <Navigate state={{ from: location }} to="/" replace></Navigate>;
+    return <Navigate state={{ from: location }} to="/login" replace></Navigate>;
 };
 
 export default AdminRoute;
+
+

@@ -10,7 +10,7 @@ const InstructorRoute = ({ children }) => {
 
     if (loading || isInstructorLoading) {
         return (
-            <div className="h-96 w-full pt-20">
+            <div className="w-full pt-20 h-96">
                 <div className=" w-full pt-[10%]">
                     <RevolvingDot
                         height="100"
@@ -24,7 +24,7 @@ const InstructorRoute = ({ children }) => {
                         visible={true}
                     />
                 </div>
-                <h1 className="h-28 text-center">Loading...</h1>
+                <h1 className="text-center h-28">Loading...</h1>
             </div>
         );
     }
@@ -33,7 +33,7 @@ const InstructorRoute = ({ children }) => {
         return children;
     }
 
-    return <Navigate state={{ from: location }} to="/" replace></Navigate>;
+    return <Navigate state={{ from: location }} to="/login" replace></Navigate>;
 };
 
 export default InstructorRoute;

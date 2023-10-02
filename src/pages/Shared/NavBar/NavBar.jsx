@@ -1,9 +1,15 @@
 import Container from "../../../components/Container";
+import useAdmin from "../../../hooks/useAdmin";
+import useInstructor from "../../../hooks/useInstructor";
 import Logo from "./Logo";
 import ProfileLoginLogout from "./ProfileLoginLogout";
 import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
+
+    const [isAdmin] = useAdmin();
+    const [isInstructor] = useInstructor();
+
     const navList = (
         <>
             <NavLink
@@ -33,9 +39,17 @@ const NavBar = () => {
                 }>
                 Classes
             </NavLink>
-            {/* //TODO: make dashboard link dynamic. when clicking it should show 1st menus page  */}
+            {/* //TODO: make dashboard link dynamic. when clicking it should show 1st menus page.
+                did it but it doesn't rerender the dashboard.
+            */}
             <NavLink
-                to="/dashboard"
+                to={
+                    isAdmin == true
+                        ? "/dashboard/manageClass"
+                        : isInstructor == true
+                        ? "/dashboard/addClass"
+                        : "/dashboard/selectedClass"
+                }
                 className={({ isActive }) =>
                     isActive
                         ? "text-lg px-4 rounded-3xl bg-white bg-opacity-50  text-gray-900 "
@@ -47,16 +61,16 @@ const NavBar = () => {
     );
     return (
         <>
-            <div className="w-full fixed z-30">
+            <div className="fixed z-30 w-full">
                 <Container>
-                    <div className="grid grid-cols-3 lg:grid-cols-4 items-center h-16  backdrop-blur-md">
+                    <div className="grid items-center h-16 grid-cols-3 lg:grid-cols-4 backdrop-blur-md">
                         <div className="dropdown lg:hidden">
                             <label
                                 tabIndex={0}
-                                className="btn  ms-6 bg-white opacity-50">
+                                className="bg-white opacity-50 btn ms-6">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="h-5 w-5"
+                                    className="w-5 h-5"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor">
@@ -70,12 +84,12 @@ const NavBar = () => {
                             </label>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-compact dropdown-content mt-3  shadow bg-base-100 bg-opacity-90 p-4 rounded-box w-52">
+                                className="p-4 mt-3 shadow menu menu-compact dropdown-content bg-base-100 bg-opacity-90 rounded-box w-52">
                                 {navList}
                             </ul>
                         </div>
                         <Logo></Logo>
-                        <div className="col-span-2 hidden lg:flex gap-5 justify-center text-white bg-blue-500 bg-opacity-40 p-2 rounded-3xl ">
+                        <div className="justify-center hidden col-span-2 gap-5 p-2 text-white bg-blue-500 lg:flex bg-opacity-40 rounded-3xl ">
                             {navList}
                         </div>
                         <ProfileLoginLogout></ProfileLoginLogout>

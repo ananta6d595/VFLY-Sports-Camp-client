@@ -11,8 +11,6 @@ import { GrRadialSelected } from "react-icons/gr";
 const DashBoardMenu = ({ children }) => {
     // TODO: checking isAdmin and isInstructor dynamic
     const [isAdmin] = useAdmin();
-
-    // console.log('isAdmin in DashBoardMenu',isAdmin);
     const [isInstructor] = useInstructor();
 
     // admin menu navigation
@@ -36,17 +34,23 @@ const DashBoardMenu = ({ children }) => {
     const instructorMenu = (
         <>
             <li>
-                <NavLink to="addClass"><AiOutlineAppstoreAdd></AiOutlineAppstoreAdd> Add a Class</NavLink>
+                <NavLink to="addClass">
+                    <AiOutlineAppstoreAdd></AiOutlineAppstoreAdd> Add a Class
+                </NavLink>
             </li>
             <li>
-                <NavLink to="instructorClasses"><BiBookmarkAlt></BiBookmarkAlt>My Classes</NavLink>
+                <NavLink to="instructorClasses">
+                    <BiBookmarkAlt></BiBookmarkAlt>My Classes
+                </NavLink>
             </li>
         </>
     );
     const studentMenu = (
         <>
             <li>
-                <NavLink to="selectedClass"><GrRadialSelected></GrRadialSelected>My Selected Classes</NavLink>
+                <NavLink to="selectedClass">
+                    <GrRadialSelected></GrRadialSelected>My Selected Classes
+                </NavLink>
             </li>
             <li>
                 <NavLink to="enrolledClass">My Enrolled Classes</NavLink>
@@ -55,17 +59,17 @@ const DashBoardMenu = ({ children }) => {
     );
     return (
         <>
-            <div className="drawer lg:drawer-open z-10">
+            <div className="z-10 drawer lg:drawer-open">
                 <input
                     id="my-drawer-2"
                     type="checkbox"
                     className="drawer-toggle"
                 />
-                <div className="drawer-content  items-center md:pt-2">
+                <div className="items-center drawer-content md:pt-2">
                     <label
                         htmlFor="my-drawer-2"
                         className="fixed drawer-button lg:hidden">
-                        <RxHamburgerMenu className="ms-2 mt-3"/>
+                        <RxHamburgerMenu className="mt-3 ms-2" />
                     </label>
                     {/* Page content here */}
                     {children}
@@ -74,15 +78,15 @@ const DashBoardMenu = ({ children }) => {
                     <label
                         htmlFor="my-drawer-2"
                         className="drawer-overlay "></label>
-                    <ul className="menu p-4 w-80 h-full rounded-2xl bg-blue-500 text-white font-semibold">
+                    <ul className="h-full p-4 font-semibold text-white bg-blue-500 menu w-80 rounded-2xl">
                         {/* Sidebar content here */}
-                        {/* // TODO: Make Dynamic   */}
-                        <h1 className="text-center mb-12 p-2 border-2 rounded-2xl border-orange-400 italic font-black uppercase">
+
+                        <h1 className="p-2 mb-12 italic font-black text-center uppercase border-2 border-orange-400 rounded-2xl">
                             {isAdmin == true
-                                ? "ADMIN's DASHBOARD"
+                                ? "Admin's DASHBOARD"
                                 : isInstructor == true
                                 ? "Instructor's DASHBOARD"
-                                : "Student's DashBoard"}
+                                : "Student's DASHBOARD"}
                         </h1>
                         {isAdmin == true
                             ? adminMenu
@@ -93,7 +97,9 @@ const DashBoardMenu = ({ children }) => {
                             <div className="divider"></div>
                         </li>
                         <li>
-                            <NavLink to="/"><HiOutlineHome></HiOutlineHome> Home</NavLink>
+                            <NavLink to="/">
+                                <HiOutlineHome></HiOutlineHome> Home
+                            </NavLink>
                         </li>
                     </ul>
                 </div>

@@ -14,7 +14,7 @@ import FeedBack from "../pages/DashBoard/FeedBack";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
-import AdminRoute from "./AdminRoute";
+
 import UpdateClass from "../pages/DashBoard/UpdateClass";
 import PaymentPage from "../Payment/PaymentPage";
 import ErrorPage from "../pages/ErrorPage";
@@ -47,6 +47,11 @@ export const router = createBrowserRouter([
             },
         ],
     },
+
+    /*  If private route or protected route generally anyone can't access with out login.
+
+
+    */
     {
         path: "dashboard",
         element: (
@@ -93,26 +98,18 @@ export const router = createBrowserRouter([
             //admin dashboard
             {
                 path: "manageClass",
-                element: (
-                    <AdminRoute>
-                        <ManageClasses></ManageClasses>
-                    </AdminRoute>
-                ),
+                element: <ManageClasses></ManageClasses>,
             },
             {
                 path: "manageUsers",
-                element: (
-                    <AdminRoute>
-                        <ManageUsers></ManageUsers>,
-                    </AdminRoute>
-                ),
+                element: <ManageUsers></ManageUsers>,
             },
             {
                 path: "manageClass/feedback/:id",
                 element: (
-                    <AdminRoute>
-                        <FeedBack></FeedBack>,
-                    </AdminRoute>
+
+                        <FeedBack></FeedBack>
+
                 ),
             },
         ],

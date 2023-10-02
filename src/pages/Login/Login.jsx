@@ -12,13 +12,12 @@ const Login = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
-
     const HandelSignIn = (event) => {
         event.preventDefault();
 
         const email = event.target.email.value;
         const password = event.target.password.value;
-
+        
         signInUser(email, password)
             .then(() => {
                 navigate(from, { replace: true });
@@ -43,12 +42,25 @@ const Login = () => {
             <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
                 <div className="relative py-3 w-full sm:max-w-xl sm:mx-auto md:mx-[24%] lg:mx-auto">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-                    <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+                    <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-12">
                         <div className="max-w-md mx-auto">
                             <div>
-                                <h1 className="text-2xl font-semibold mb-7 text-center">
+                                <h1 className="text-3xl font-semibold mb-2 text-center">
                                     Login
                                 </h1>
+                                <p className="text-center">
+                                    For admin role: <br />
+                                    ph@gmail.com <br />
+                                    pass: ASD!@#
+                                    <br /> <br />
+                                    For Instructor: <br /> email: luke@gmail.com
+                                    <br /> password: ASD!@# <br />
+                                    <br />
+                                    By default other accounts will have student
+                                    role.
+                                    <br />
+                                    <br />
+                                </p>
                             </div>
                             <Form onSubmit={HandelSignIn} className=" mb-4">
                                 <div className="mb-4 relative">
@@ -92,7 +104,7 @@ const Login = () => {
                                     Or login with:
                                 </span>
 
-                                   <SocialLogin></SocialLogin>
+                                <SocialLogin></SocialLogin>
 
                                 <p className="mt-4">
                                     Don&apos;t have an account?{" "}
